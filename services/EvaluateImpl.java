@@ -63,7 +63,12 @@ public class EvaluateImpl implements Evaluate {
             values.push(calc(operator, values));
         }
 
-        return values.pop();
+        double res = values.pop();
+        if(res < 0){
+            throw new InvalidExpression("Bad Expression: negative result");
+        }else {
+            return res;
+        }
     }
 
     private double calc(NodeType op, Stack<Double> values) throws InvalidExpression {
