@@ -3,13 +3,13 @@ package services;
 import java.util.ArrayList;
 import java.util.Stack;
 
-import utils.NodeType;
+import utils.TokenType;
 import utils.InvalidExpression;
 
 import java.util.concurrent.TimeUnit;
 
 import static utils.Operator.*;
-import static utils.NodeType.*;
+import static utils.TokenType.*;
 
 public class EvaluateImpl implements Evaluate {
     public double evaluate(ArrayList<String> expression) throws InvalidExpression {
@@ -20,10 +20,10 @@ public class EvaluateImpl implements Evaluate {
         // }
         
         Stack<Double> values = new Stack<Double>();
-        Stack<NodeType> operators = new Stack<NodeType>();
+        Stack<TokenType> operators = new Stack<TokenType>();
 
         for (String s : expression) {
-            if (NodeType.isDouble(s)) {
+            if (TokenType.isDouble(s)) {
                 values.add(Double.parseDouble(s));
             } else if (s.equals("(")) {
                 operators.push(LB);
@@ -44,7 +44,7 @@ public class EvaluateImpl implements Evaluate {
                 // Remove '(' from the stack
                 operators.pop();
 
-            } else if (NodeType.isOperator(s)) {
+            } else if (TokenType.isOperator(s)) {
                 while (!operators.isEmpty() && getPriority(getType(s)) <= getPriority(operators.peek())) {
                     try {
                         values.push(calc(operators.pop(), values));
@@ -56,7 +56,7 @@ public class EvaluateImpl implements Evaluate {
         }
 
         while (!operators.isEmpty()) {
-            NodeType operator = operators.pop();
+            TokenType operator = operators.pop();
             if (operator == LB) {
                 throw new InvalidExpression("Bad Expression: braces don't match");
             }
@@ -71,7 +71,7 @@ public class EvaluateImpl implements Evaluate {
         }
     }
 
-    private double calc(NodeType op, Stack<Double> values) throws InvalidExpression {
+    private double calc(TokenType op, Stack<Double> values) throws InvalidExpression {
         int operandsCount = values.size();
         if (isBinaryOperator(op)) {
             if (operandsCount < 2) {
@@ -83,7 +83,7 @@ public class EvaluateImpl implements Evaluate {
         }
     }
 
-    private double _calc(NodeType op, double x, double y) {
+    private double _calc(TokenType op, double x, double y) {
         switch (op) {
             case ADD:
                 return y + x;

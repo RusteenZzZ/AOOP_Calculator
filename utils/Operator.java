@@ -3,12 +3,12 @@ package utils;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static utils.NodeType.*;
+import static utils.TokenType.*;
 
 public class Operator {
-    static final ArrayList<NodeType> binaryOperators = new ArrayList<>(Arrays.asList(ADD, SUB, DIV, MOD, MUL));
+    static final ArrayList<TokenType> binaryOperators = new ArrayList<>(Arrays.asList(ADD, SUB, DIV, MOD, MUL));
 
-    public static boolean isBinaryOperator(NodeType nt) {
+    public static boolean isBinaryOperator(TokenType nt) {
         return Operator.binaryOperators.contains(nt);
     }
 
@@ -21,7 +21,7 @@ public class Operator {
      * @param nt
      * @return priority of operator
      */
-    public static int getPriority(NodeType nt) {
+    public static int getPriority(TokenType nt) {
         if (nt == LB || nt == RB)
             return 0;
         if (nt == SUB || nt == ADD)

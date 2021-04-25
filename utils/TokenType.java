@@ -1,14 +1,14 @@
 package utils;
 
-public enum NodeType {
+public enum TokenType {
     OPERAND, ADD, SUB, DIV, MOD, MUL, LB, RB;
 
     /**
      * 
      * @param s
-     * @return NodeType element from string
+     * @return TokenType element from string
      */
-    public static NodeType getType(String s) {
+    public static TokenType getType(String s) {
         switch (s) {
             case "+":
                 return ADD;
@@ -34,7 +34,7 @@ public enum NodeType {
      * @param nt
      * @return boolean value representing if the nt is an operator
      */
-    public static boolean isOperator(NodeType nt) {
+    public static boolean isOperator(TokenType nt) {
         return nt != OPERAND;
     }
 
@@ -52,7 +52,7 @@ public enum NodeType {
      * @param nt
      * @return boolean value representing if the nt is an operand
      */
-    public static boolean isOperand(NodeType nt) {
+    public static boolean isOperand(TokenType nt) {
         return nt == OPERAND;
     }
 

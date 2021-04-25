@@ -12,9 +12,9 @@ import java.util.ArrayList;
 import services.Evaluate;
 
 import static client.KeyboardButtonType.*;
-import static utils.NodeType.isDouble;
-import static utils.NodeType.isOperator;
-import static utils.NodeType.isOperand;
+import static utils.TokenType.isDouble;
+import static utils.TokenType.isOperator;
+import static utils.TokenType.isOperand;
 import static utils.Operator.isBinaryOperator;
 import static javax.swing.JOptionPane.*;
 
